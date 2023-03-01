@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="col-12">
+        <div class="row">
+            {% for book in books %}
+                <div class="col-12 col-sm-6 col-md-4 my-2">
+                    <div class="card">
+                        <img class="card-img-top" src="/myapp{{book.image.url}}" alt="Card image cap">
+                        <div class="card-title">
+                            <h5 class="card-title" style="text-align:center"; >{{book.name}}</h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{book.genre}}</li>
+                            <li class="list-group-item">{{book.author}}</li>
+                            <li class="list-group-item">{{book.press}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" class="btn btn-primary card-link">Добавить в корзину</a>
+                            <a href="#" class="btn btn-info card-link">Избранное</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        <div>
+    <div>
+{% endblock content %}

@@ -1,0 +1,64 @@
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/static/css/main.css?v=1" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-warning">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-between">
+        <h4>
+            <a class="navbar-brand text-white" href="{% url 'index' %} ">Book Store</a>
+
+            <a href="" class="navbar-brand text-white">Новости</a>
+            <a type='button' href="{% url 'get_all_books' %}" class="navbar-brand text-white">Каталог товаров</a>
+        </h4>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0">
+          
+           <!-- Icons -->
+      
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="#">
+              <i class="fa fa-fw fa-shopping-cart text-white fa-2x"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="#">
+              <i class="fa fa-fw fa-heart text-white fa-2x"></i>
+            </a>
+          </li>
+          <!-- Icon dropdown -->
+          <li class="nav-item me-3 me-lg-0">
+            <a  type='button' class="nav-link" href="{% url 'login' %}">
+              <i class="fa fa-fw fa-user text-white fa-2x" ></i>
+            </a>
+        </ul>
+      
+
+        <div class="text-end" style="text-align: right">
+          {% if user.is_authenticated %}
+            <p class="text-white" >Вы вошли в систему как {{ user.username }}.</p>
+            <a type="button" href='{% url 'logout' %}' class="btn btn-outline-light me-2">Выйти</a>
+          {% else %}
+            <p class="text-white">Вы не вошли в систему.</p>
+            <a type="button" href='{% url 'login' %}' class="btn btn-outline-light me-2">Войти</a>
+          {% endif %}
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<body>
+  <div class='container'>
+    <div class="row">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+  
+</body>
+
