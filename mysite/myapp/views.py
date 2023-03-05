@@ -12,6 +12,7 @@ from myapp import models
 
 
 
+
 def index(request: HttpRequest) -> HttpRequest:
     """index view."""
 
@@ -27,7 +28,13 @@ def index(request: HttpRequest) -> HttpRequest:
     )
 
 
+# def basket(request):
+#     print("basket")
+#     return render(request, 'myapp/basket.html', {"title": "basket"})
 
+# def sellerbas(request):
+#     print("sellerbas")
+#     return render(request, 'myapp/books/new.html', {"title": "add_new_book"})
 
 # def register(request):
 #     if request.method == 'POST':

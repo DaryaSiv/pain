@@ -1,5 +1,5 @@
 
-{% extends 'myapp/index.html' %}
+{% extends 'myapp/books/.html' %}
 
 {% block content %}
     <br>
@@ -9,5 +9,5 @@
 
     <h3>Login again?</h3>
     <a href="{% url 'login' %}">Login</a> </br>
-    <a href="{% url 'index' %}">Or go back to home.</a>
+    <a href="{% url 'get_all_books' %}">Or go back to home.</a>
 {% endblock content %}

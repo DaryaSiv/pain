@@ -1,6 +1,6 @@
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.base_user import BaseUserManager
 
 
@@ -20,6 +20,12 @@ class CustomUserManager(BaseUserManager):
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save()
+        group = Group.objects.get(name='customer')
+        user.save()
+        user.groups.add(group)
+        group = Group.objects.get(name='seller')
+        user.save()
+        user.groups.add(group)
         return user
 
 class CustomUser(User):

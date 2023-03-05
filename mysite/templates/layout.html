@@ -33,6 +33,15 @@
             </a>
         </ul>
       
+        {% comment %} {% if request.user.groups.all.0.name == 'customer'%}
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'books/' %}">Корзина</a>
+                      </li>
+
+        {% if request.user.groups.all.0.name == 'seller'%}
+                        <li class="nav-item">
+                          <a class="nav-link" href="{% url 'books/new' %}">Добавть товар</a>
+                        </li> {% endcomment %}
 
         <div class="text-end" style="text-align: right">
           {% if user.is_authenticated %}

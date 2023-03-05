@@ -21,6 +21,12 @@ from django.conf.urls.static import static
 from .views import CustomLogin, CustomLogout
 from django.conf import settings
 from myapp import models
+from .api_views import PublisherView
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('index', views.index, name='index'),
@@ -32,6 +38,10 @@ urlpatterns = [
     # ссылки для сущности Книга
     path('books/new', views.add_new_book, name="add_new_book"),
     path('books/', views.get_all_books, name="get_all_books"),
+
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/publishers', PublisherView.as_view(), name='publisher_api'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
