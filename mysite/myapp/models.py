@@ -20,12 +20,12 @@ class CustomUserManager(BaseUserManager):
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
         user.save()
-        group = Group.objects.get(name='customer')
-        user.save()
-        user.groups.add(group)
-        group = Group.objects.get(name='seller')
-        user.save()
-        user.groups.add(group)
+        # group = Group.objects.get(name='customer')
+        # user.save()
+        # user.groups.add(group)
+        # group = Group.objects.get(name='seller')
+        # user.save()
+        # user.groups.add(group)
         return user
 
 class CustomUser(User):
@@ -56,7 +56,7 @@ class Author(models.Model):
     class Meta:
         verbose_name = "Автор"
         verbose_name_plural = 'Авторы'
-    
+
     def __str__(self) -> str:
         return self.name
 
@@ -66,7 +66,7 @@ class Language(models.Model):
     class Meta:
         verbose_name = "Язык"
         verbose_name_plural = 'Языки'
-    
+
     def __str__(self) -> str:
         return self.name
 
@@ -87,7 +87,7 @@ class Genre(models.Model):
     class Meta:
         verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
-    
+
     def __str__(self):
         return self.name
 
