@@ -14,7 +14,7 @@
         {% endfor %} {% endcomment %}
 
         <div class="modal-body p-5 pt-0">
-          <form class="" action="{% url 'index' %}" method="POST">
+          <form class="" action="{% url 'custom_login' %}" method="POST">
             {% csrf_token %}
             {%for field in form%}
             <p>{{field.label}}: <br> {{field|attr:"class: form-control rounded-3"}}</p>

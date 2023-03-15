@@ -3,66 +3,6 @@
 <link rel="stylesheet" type="text/css" href="/static/css/main.css?v=1" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!--<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-warning">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-between">
-        <h4>
-            <a class="navbar-brand text-white" href="{% url 'index' %} ">Book Store</a>
-
-            <a href="" class="navbar-brand text-white">Новости</a>
-            <a type='button' href="{% url 'get_all_books' %}" class="navbar-brand text-white">Каталог товаров</a>
-        </h4>
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 mb-md-0">
-          
-         
-      
-          <li class="nav-item me-3 me-lg-0">
-            <a class="nav-link" href="#">
-              <i class="fa fa-fw fa-shopping-cart text-white fa-2x"></i>
-            </a>
-          </li>
-          <li class="nav-item me-3 me-lg-0">
-            <a class="nav-link" href="#">
-              <i class="fa fa-fw fa-heart text-white fa-2x"></i>
-            </a>
-          </li>
-          
-          <li class="nav-item me-3 me-lg-0">
-            {% if user.is_authenticated %}
-              <a  type='button' class="nav-link" href="{% url 'logout' %}">
-                <i class="fa fa-fw fa-user text-white fa-2x" ></i>
-              </a>
-            {% else %}
-              <a  type='button' class="nav-link" href="{% url 'custom_login' %}">
-                <i class="fa fa-fw fa-user text-white fa-2x" ></i>
-              </a>
-            {% endif %}
-        </ul>
-      
-        {% comment %} {% if request.user.groups.all.0.name == 'customer'%}
-                      <li class="nav-item">
-                        <a class="nav-link" href="{% url 'books/' %}">Корзина</a>
-                      </li>
-
-        {% if request.user.groups.all.0.name == 'seller'%}
-                        <li class="nav-item">
-                          <a class="nav-link" href="{% url 'books/new' %}">Добавть товар</a>
-                        </li> {% endcomment %}
-
-        <div class="text-end" style="text-align: right">
-          {% if user.is_authenticated %}
-            <p class="text-white" >Вы вошли в систему как {{ user.username }}.</p>
-            <a type="button" href="{% url 'logout' %}" class="btn btn-outline-light me-2">Выйти</a>
-          {% else %}
-            <p class="text-white">Вы не вошли в систему.</p>
-            <a type="button" href="{% url 'custom_login' %}" class="btn btn-outline-light me-2">Войти</a>
-          {% endif %}
-          
-        </div>
-      </div>
-    </div>
-  </header>-->
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="{% url 'index' %}">Book Store</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,23 +25,44 @@
             <a class="dropdown-item" href="#">Корзина</a>
             <a class="dropdown-item" href="#">Избранное</a>
         </li>
-        {% comment %} <li class="nav-item">
-          <a class="nav-link disabled" href="#">Вход</a>
-        </li> {% endcomment %}
-       
+
+        {% if request.user.groups.all.0.name == 'customer'%}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'get_all_books' %}">Корзина</a>
+              
+                </li>
+              
+              
+                {%endif%}
+        {% comment %} {% if request.user.groups.all.0.name == 'seller'%}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url '' %}">Продажа</a>
+              
+                </li>
+                {%endif%} {% endcomment %}
+
+        {% if request.user.groups.all.0.name == 'seller'%}
+                <li class="nav-item">
+                  
+                  <a class="nav-link" href="{% url 'add_new_book' %}">Добавить товар</a>
+                </li>
+                {%endif%}
+
       </ul>
-      <form class="form-inline my-2 my-lg-0 justify-content-center">
+      {% comment %} <form class="form-inline my-2 my-lg-0 justify-content-center">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-light my-2 my-sm-0 " type="submit">Поиск</button>
-      </form>
-      <div class="text-end" style="text-align: right">
-        {% if user.is_authenticated %}
-          <p class="text-light" >Вы вошли в систему как {{ user.username }}.</p>
-          <a type="button" href="{% url 'logout' %}" class="btn btn-outline-dark me-2">Выйти</a>
-        {% else %}
-          <p class="text-light">Вы не вошли в систему.</p>
-          <a type="button" href="{% url 'custom_login' %}" class="btn btn-outline-light me-2">Войти</a>
-        {% endif %}
+      </form> {% endcomment %}
+
+        <div class="text-end" style="text-align: right">
+          {% if user.is_authenticated %}
+            <p class="text-light" >Вы вошли в систему как {{ user.username }}.</p>
+            <a type="button" href="{% url 'logout' %}" class="btn btn-outline-dark me-2">Выйти</a>
+          {% else %}
+            <p class="text-light">Вы не вошли в систему.</p>
+            <a type="button" href="{% url 'custom_login' %}" class="btn btn-outline-light me-2">Войти</a>
+          {% endif %}
+        </div>
       </div>
     </div>
   </nav>

@@ -1,5 +1,5 @@
 
-{% extends 'myapp/books/.html' %}
+{% extends 'myapp/layout.html' %}
 
 {% block content %}
     <br>
@@ -8,6 +8,6 @@
     </div>
 
     <h3>Login again?</h3>
-    <a href="{% url 'login' %}">Login</a> </br>
-    <a href="{% url 'get_all_books' %}">Or go back to home.</a>
+    <a href="{% url 'custom_login' %}">Login</a> </br>
+    <a href="{% url 'index' %}">Or go back to home.</a>
 {% endblock content %}

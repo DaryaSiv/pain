@@ -2,14 +2,17 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
-from myapp import forms
+from .forms import UserRegistrationForm
 from .models import CityLocation, Book
 from django.shortcuts import resolve_url
 from django.views.generic import View
-# Create your views here.
 from django.http.request import HttpRequest
+from django.utils.decorators import method_decorator
+from myapp import forms
+from .decorators import *
 from myapp import models
-
+from django.contrib.auth.decorators import user_passes_test, login_required
+from myapp import filters
 
 
 
@@ -28,27 +31,27 @@ def index(request: HttpRequest) -> HttpRequest:
     )
 
 
-# def basket(request):
-#     print("basket")
-#     return render(request, 'myapp/basket.html', {"title": "basket"})
+def basket(request):
+    print("basket")
+    return render(request, 'myapp/basket.html', {"title": "basket"})
 
-# def sellerbas(request):
-#     print("sellerbas")
-#     return render(request, 'myapp/books/new.html', {"title": "add_new_book"})
+def sellerbas(request):
+    print("sellerbas")
+    return render(request, 'myapp/books/new.html', {"title": "add_new_book"})
 
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserRegistrationForm(request.POST)
-#         if form.is_valid():
-#             form.save()
+def register(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
 
-#             messages.success(request, f'Вы создали аккаунт')
-#             return redirect('login')
-#     else:
-#         form = UserRegistrationForm()
+            messages.success(request, f'Вы создали аккаунт')
+            return redirect('custom_login')
+    else:
+        form = UserRegistrationForm()
 
-#     context = {'form': form}
-#     return render(request, 'myapp/registration.html', context)
+    context = {'form': form}
+    return render(request, 'myapp/registration.html', context)
 
 
 def register(request):
@@ -71,7 +74,7 @@ def register(request):
     return render(request, 'myapp/registration.html', context)
 
 
-
+# @method_decorator(unauthenticated_user(), name='dispatch')
 class CustomLogin(LoginView):
     template_name = 'myapp/login.html'
 
@@ -79,12 +82,21 @@ class CustomLogin(LoginView):
         return resolve_url('index')
 
 class CustomLogout(LogoutView):
-    template_name = 'myapp/logout.html'
 
     def get_success_url(self):
-        return resolve_url('login')
+        return resolve_url('custom_login')
+
+def check_admin(user):
+    is_saler = False
+    print("FFFFFFFFFFFF", user.is_saler())
+    if user.is_saler().name == 'Продавец':
+        is_saler = True
+
+    return is_saler
 
 
+@login_required
+@user_passes_test(check_admin)
 def add_new_book(request):
     form = forms.NewBookForm()
     result = ""
@@ -92,12 +104,16 @@ def add_new_book(request):
     if request.method == "POST":
         form = forms.NewBookForm(request.POST, request.FILES)
         if form.is_valid():
-            print("NDJNASKJFNSKJFNKFNDKJFNDKJFNDSKJFNJKFNJKFNKJDFNJNDSKJ")
             form.save()
             result = "Книга успешно добавлена!"
 
     return render(request, 'myapp/books/new.html', context={'form': form, 'result': result})
 
 def get_all_books(request):
-    books = models.Book.objects.all()
-    return render(request, 'myapp/books/catalog.html', context={'books': books})
+    # request.session.pop("filter")
+    filter_parameters = request.GET
+
+    books = filters.BooksFilter(request.GET, queryset=Book.objects.all())
+
+    print("FFFFFFFFF: ", books.qs)
+    return render(request, 'myapp/books/catalog.html', {'filter': books, 'books': books.qs})

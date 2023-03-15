@@ -4,25 +4,6 @@
 
 {% load widget_tweaks %} 
 
-{% comment %} <form action="" method="POST">
-    {% csrf_token %}
-    <div class="container">
-        {% for field in form %}
-        
-        <div>
-            <p>{{field.label}}: <br> {{field|attr:"class: form-control"}}</p>
-            {% for error in field.errors %}
-                <small style="color: red">{{error}}</small>
-                
-            {% endfor %}
-        </div>
-        {% endfor %}
-    </div> 
-
-
-    <button type="submit">register</button>
-</form>   {% endcomment %}
-
 <div class="modal-signin d-block bg-white col align-self-center" tabindex="-1" role="dialog" id="modalSignin">
     <div class="modal-dialog" role="document">
       <div class="modal-content rounded-4 shadow">
