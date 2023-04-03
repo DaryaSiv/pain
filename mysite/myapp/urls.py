@@ -53,6 +53,12 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/publishers', PublisherView.as_view(), name='publisher_api'),
+
+    #cart and buy
+    path('cart/', views.basket, name='cart'),
+    path('cart/add/<int:id>', views.add_to_basket, name='cart_add' ),
+    path('cart/remove/<int:id>', views.basket_remove, name='cart_remove'),
+    path('buy/', views.order_book, name='purchase')
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

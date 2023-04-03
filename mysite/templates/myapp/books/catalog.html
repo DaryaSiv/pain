@@ -4,36 +4,50 @@
         <form method="GET">
             {{filter.form.as_p }}
             <button type="submit" class="btn btn-info btn-outline-success">Применить</button>
-        
-            {% comment %} <input type="hidden" name="filter" value="1"> {% endcomment %}
-            {% comment %} <label>Цена</label>
-            <input type="number" class="form-control" name="priceFrom">
-            <input type="number" class="form-control" name="priceTo">
-            <input type="text" class="form-control" name="genre" placeholder="Жанр"> {% endcomment %}
-            {% comment %} {{ books.form.as_p }} {% endcomment %}
         </form>
     </div>
     <div class="col-8">
         <div class="row">
             {% for book in books %}
-                <div class="col-12 col-sm-6 col-md-4 my-2">
-                    <div class="card">
-                        <img class="card-img-top img-fluid w-75" src="/myapp{{book.image.url}}" alt="Card image cap">
+           
+                <div class="col-12 col-sm-6 col-md-4 my-2 card">
+                    <div class="">
+                        <img class="card-img-top img-fluid w-75 align-self-center m-3" src="/myapp{{book.image.url}}" alt="Card image cap">
                         <div class="card-title">
                             <h5 class="card-title" style="text-align:center"; >{{book.name}}</h5>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{book.genre}}</li>
-                            <li class="list-group-item">{{book.author}}</li>
-                            <li class="list-group-item">{{book.press}}</li>
-                        </ul>
                         <div class="card-body">
-                            <a href="#" class="btn btn-primary card-link">Добавить в корзину</a>
-                            <a href="#" class="btn btn-info card-link">Избранное</a>
+                            <div class="d-flex justify-content-beetwen">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">{{book.genre}}</li>
+                                    <li class="list-group-item">{{book.author}}</li>
+                                    <li class="list-group-item">{{book.press}}</li>
+                                    <li class="list-group-item" id="price{{book.id}}">{{book.price}}</li>
+                                </ul>
+                            </div>
+                            {% comment %} <div class="card-body">
+                                <a href="#" class="btn btn-primary card-link">Добавить в корзину</a>
+                                <a href="#" class="btn btn-info card-link">Избранное</a>
+                            </div> {% endcomment %}
+                            <div class="d-flex justify-content-between">
+                                <div class="" style="padding: 1.25rem 1.25rem; padding-top: 1.25rem; padding-right: 1.25rem; padding-bottom: 1.25rem; padding-left: 1.25rem;">
+                                    <a id="" data-book="{{book.id}}" class="addToCart" href="/myapp/cart/add/{{book.id}}">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
+                                </div>
+                                <div class="" style="padding: 1.25rem 1.25rem; padding-top: 1.25rem; padding-right: 1.25rem; padding-bottom: 1.25rem; padding-left: 1.25rem;">
+                                    <a class="" href="#">
+                                        <i class="fas fa-heart"></i>
+                                    </a>
+                                </div>
+                                {% comment %} </ul> {% endcomment %}
+                            </div>
                         </div>
                     </div>
                 </div>
+
             {% endfor %}
         <div>
     <div>
+        <script src="/static/js/main.js"></script>
 {% endblock content %}

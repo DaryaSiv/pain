@@ -158,18 +158,21 @@ class Book(models.Model):
         return self.name
 
 class Basket(models.Model):
-    name = models.CharField(max_length=128)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     price = models.FloatField('Цена')
-    quantity_buying = models.FloatField('Общая цена')
+    quantity_buying = models.IntegerField('Общее количество')
 
     class Meta:
         verbose_name = "Корзина"
         verbose_name_plural = "Корзины"
 
     def __str__(self) -> str:
-        return self.name
+        return self.user.username
+
+    def sum(self):
+        print("FFFFFFFFF:   ", self.price, self.quantity_buying)
+        return self.price * self.quantity_buying
 
 class Card(models.Model):
     name = models.CharField("Банковская карта", max_length=255, unique=True )
@@ -196,7 +199,7 @@ class Buy(models.Model):
     purchased_books = models.ManyToManyField(to=Book)
     date = models.SmallIntegerField("Дата покупки")
     total_price = models.FloatField()
-    quantity_buying = models.ForeignKey(Basket, on_delete=models.CASCADE)
+    total_buying = models.ForeignKey(Basket, on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
     pay = models.ForeignKey(Pay, on_delete=models.CASCADE)
 

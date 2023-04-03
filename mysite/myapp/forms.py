@@ -30,3 +30,15 @@ class NewBookForm(forms.ModelForm):
     class Meta:
         model = models.Book
         fields = '__all__'
+
+class Basket(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(Basket, self).__init__(*args, **kwargs)
+        self.fields['book'].required = False
+        self.fields['user'].required = False
+        self.fields['quantity_buying'].required = False
+        self.fields['price'].required = False
+
+    class Meta:
+        model = models.Basket
+        fields = "__all__"

@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 from .forms import UserRegistrationForm
-from .models import CityLocation, Book
+from .models import CityLocation, Book, Basket
 from django.shortcuts import resolve_url
 from django.views.generic import View
 from django.http.request import HttpRequest
@@ -13,7 +13,7 @@ from .decorators import *
 from myapp import models
 from django.contrib.auth.decorators import user_passes_test, login_required
 from myapp import filters
-
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request: HttpRequest) -> HttpRequest:
@@ -31,9 +31,6 @@ def index(request: HttpRequest) -> HttpRequest:
     )
 
 
-def basket(request):
-    print("basket")
-    return render(request, 'myapp/basket.html', {"title": "basket"})
 
 def sellerbas(request):
     print("sellerbas")
@@ -117,3 +114,36 @@ def get_all_books(request):
 
     print("FFFFFFFFF: ", books.qs)
     return render(request, 'myapp/books/catalog.html', {'filter': books, 'books': books.qs})
+
+def basket(request):
+    items = Basket.objects.filter(user=request.user).all()
+    form = forms.Basket()
+
+    return render(request, 'myapp/cart.html', context={'form': form, 'items': items})
+
+
+@csrf_exempt
+def add_to_basket(request, id):
+    book =  Book.objects.get(id=id)
+    print(book)
+    basket = Basket.objects.filter(user=request.user, book=book)
+    price = request.POST.get("price")
+    print(basket)
+
+    if not basket.exists():
+        Basket.objects.create(user = request.user, book=book, price=price, quantity_buying=1)
+    else:
+        basket=basket.first()
+        basket.quantity_buying += 1
+        basket.save()
+
+    return render(request, 'myapp/books/add.html')
+
+def basket_remove(request, id):
+    basket = Basket.objects.get(id=id)
+    basket.delete()
+    return redirect("cart")
+
+
+def order_book(request):
+    return render(request, 'myapp/purchase.html')
