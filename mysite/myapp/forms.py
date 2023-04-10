@@ -42,3 +42,5 @@ class Basket(forms.ModelForm):
     class Meta:
         model = models.Basket
         fields = "__all__"
+
+

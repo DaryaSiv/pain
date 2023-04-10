@@ -118,7 +118,6 @@ def get_all_books(request):
 def basket(request):
     items = Basket.objects.filter(user=request.user).all()
     form = forms.Basket()
-
     return render(request, 'myapp/cart.html', context={'form': form, 'items': items})
 
 
