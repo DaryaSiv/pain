@@ -1,21 +1,10 @@
-{% extends 'layout.html' %}
+{%extends 'layout.html'%}
+{% load widget_tweaks %}
+
 {% block content %}
-<link href="C:\Users\user\Desktop\pain\mysite\static\css\catalog.css" rel="stylesheet" type="text/css">
-<body>
-<div>
-    <div>
-        <h5>Фильтер книг</h5>
-    </div>
-    <div class="col-4 d-flex justify-content-start w-75 h-75" style="padding: 1.25rem 1.25rem; padding-top: 1.25rem; padding-right: 1.25rem; padding-bottom: 1.25rem; padding-left: 1.25rem;">
-            <form method="GET">
-                {{filter.form.as_p }}
-                <button type="submit" class="btn btn-info btn-outline-success">Применить</button>
-            </form>
-    </div>
-</div>
-    <div class="col-8">
-        <div class="row">
-            {% for book in books %}
+<div class="col-8">
+    <div class="row">
+        {% for book in books %}
                 <div class="col-12 col-sm-6 col-md-4 my-2 card" >
                     <div class="">
                         <img class="card-img-top img-fluid w-75 align-self-center m-3" src="/myapp{{book.image.url}}" alt="Card image cap">
@@ -25,7 +14,6 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-beetwen">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">{{book.genre}}</li>
                                     <li class="list-group-item">{{book.author}}</li>
                                     <li class="list-group-item">{{book.press}}</li>
                                     <li class="list-group-item" id="price{{book.id}}">{{book.price}}</li>
@@ -108,6 +96,7 @@
                                             </div>
                                             </div>
                                         </div>
+
                                     <!--При успешном добавлении-->
                                         <div class="modal fade" id="favSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -137,4 +126,4 @@
     <script src="/static/js/main.js"></script>
     <script src="/static/js/favorite.js"></script>
 </body>
-{% endblock content %}
+{%endblock%}

@@ -1,27 +1,108 @@
-{%extends 'layout.html'%}
+{%extends 'layout2.html'%}
 {% block content %}
-<form>
-  <div class="form-row">
-    <label for='validationServer01'>first name</label>
-    <input type='text' class='form-control is-valid' id='validationServer01' placeholder='First Name' value='Name' required>
-    <div class='valid-feedback'>
-      Great!
+<body>
+  <h3>Оформить заказ</h3>
+  <form>
+    <div class="form-row">
+      <div class="col-md-3 mb-3">
+        <label for="validationServer01">Фамилия</label>
+        <input type="text" class="form-control" id="validationServer01" placeholder="Фамилия" value="" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationServer02">Имя</label>
+        <input type="text" class="form-control" id="validationServer02" placeholder="Имя" value="" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationServer02">Отчество</label>
+        <input type="text" class="form-control" id="validationServer02" placeholder="Отчество" value="" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
     </div>
-  </div>
-  <div class='col-md-4 mb-3'>
-    <label for='validationServer02'>last name</label>
-    <input type='text' class='form-control is-valid' id='validationServer02' placeholder='Last Name' value='Last name' required>
-    <div class='valid-feedback'>
-      Great!
+
+    <div class="form-row">
+      <div class="col-md-3 mb-3">
+        <label for="validationServer02">Номер телефона</label>
+        <input type="text" class="form-control" id="validationServer02" placeholder="Номер телефона" value="" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationServer02">Email</label>
+        <input type="text" class="form-control" id="validationServer02" placeholder="Email" value="" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
     </div>
-  </div>
-  <div class='col-md-4 mb-3'>
-    <label for='validationServerEmail'>Email</label>
-    <input type='text' class='form-control is-valid' id='validationServerEmail' placeholder='Email' value='' required>
-    <div class='valid-feedback'>
-      Great!
+
+    <div class="form-row">
+      <div class="col-md-6 mb-3">
+        <label for="validationServer03">Страна</label>
+        <input type="text" class="form-control" id="validationServer03" placeholder="Страна" required>
+        <div class="invalid-feedback">
+          Please provide a valid city.
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationServer04">Область</label>
+        <input type="text" class="form-control" id="validationServer04" placeholder="Область" required>
+        <div class="invalid-feedback">
+          Please provide a valid state.
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationServer05">Адрес</label>
+        <input type="text" class="form-control" id="validationServer05" placeholder="Адрес" required>
+        <div class="invalid-feedback">
+          Please provide a valid zip.
+        </div>
+      </div>
     </div>
-  </div>
-  <button class="btn btn-primary" type="submit">Submit form</button>
-</form>
+    <div class="form-row">
+      <div class="col-md-3 mb-3">
+        <label for="validationServer03">Дом</label>
+        <input type="text" class="form-control" id="validationServer03" placeholder="Дом" required>
+        <div class="invalid-feedback">
+          Please provide a valid city.
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationServer04">Квартира</label>
+        <input type="text" class="form-control" id="validationServer04" placeholder="Номер квартиры" required>
+        <div class="invalid-feedback">
+          Please provide a valid state.
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <label for="validationServer05">Почтовый индекс</label>
+        <input type="text" class="form-control" id="validationServer05" placeholder="Почтовый индекс" required>
+        <div class="invalid-feedback">
+          Please provide a valid zip.
+        </div>
+      </div>
+    </div>
+  </form>
+  <form>
+    <div class="form-group">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" required>
+        <label class="form-check-label" for="invalidCheck3">
+          Отметьте галочку, если соглашаетесь с условиями сайта на обработку вашей информации
+        </label>
+        <div class="">
+          Вам нужно нажать, если вы согласны со всеми условиями сайта
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Оофрмить заказ</button>
+  </form>
+</body>
 {%endblock%}

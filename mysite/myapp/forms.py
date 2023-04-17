@@ -43,4 +43,17 @@ class Basket(forms.ModelForm):
         model = models.Basket
         fields = "__all__"
 
+class Favorite(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(Favorite, self).__init__(*args, **kwargs)
+        self.fields['book'].required = False
+        self.fields['user'].required = False
 
+    class Meta:
+        model = models.Favorite
+        fields = "__all__"
+
+class Order(forms.ModelForm):
+    class Meta:
+        model = models.Buy
+        fields = '__all__'

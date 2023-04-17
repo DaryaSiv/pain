@@ -35,6 +35,7 @@ urlpatterns = [
 
     path('login/', views.CustomLogin.as_view(), name='custom_login'),
     path('logout/', views.CustomLogout.as_view(), name='logout'),
+    path('user/user_profile', views.user_profile, name='profile'),
 
     path("reset_password/", auth_views.PasswordResetView.as_view(), 
            name='reset_password',),
@@ -49,6 +50,7 @@ urlpatterns = [
     # ссылки для сущности Книга
     path('books/new', views.add_new_book, name="add_new_book"),
     path('books/', views.get_all_books, name="get_all_books"),
+    path('genres/<int:pk>/', views.GenreDetailView.as_view(), name="GenreDetailView"),
 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
@@ -58,7 +60,12 @@ urlpatterns = [
     path('cart/', views.basket, name='cart'),
     path('cart/add/<int:id>', views.add_to_basket, name='cart_add' ),
     path('cart/remove/<int:id>', views.basket_remove, name='cart_remove'),
-    path('buy/', views.order_book, name='purchase')
+    path('buy/', views.order_book, name='purchase'),
+
+    #favorite
+    path('books/favorite/', views.favorite, name='favorite'),
+    path('books/favorite/add/<int:id>', views.add_favorite_book, name='favorite_add' ),
+    path('books/favorite/remove/<int:id>', views.favorite_remove, name='favorite_remove'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

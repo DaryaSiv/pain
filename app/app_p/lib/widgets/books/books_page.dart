@@ -27,31 +27,34 @@ class _BooksPageState extends State<BooksPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Главная страница"),
-      ),
-      body: SizedBox(
-          width: 500,
-          height: 200,
-          child: Card(
-            margin: EdgeInsets.all(10),
-            color: Colors.green[100],
-            shadowColor: Colors.blueGrey,
-            elevation: 10,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const ListTile(
-                  leading: Icon(Icons.album, color: Colors.cyan, size: 45),
-                  title: Text(
-                    "Let's Talk About Love",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  subtitle: Text('Modern Talking Album'),
-                ),
-              ],
-            ),
-          )),
-    );
+        appBar: AppBar(
+          title: Text("Главная страница"),
+        ),
+        body: Card(
+          margin: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Image.asset(''),
+                title: const Text('Demo Title'),
+                subtitle: const Text('This is a simple card in Flutter.'),
+              ),
+            ],
+          ),
+        ),
+        Card(
+          margin: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              ListTile(
+                leading: Image.asset(''),
+                title: const Text('Книга'),
+                subtitle: const Text('TUT BOOK'),
+              ),
+            ],
+          ),
+        ));
   }
 }

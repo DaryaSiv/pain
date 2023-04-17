@@ -2,7 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import User, Group, AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
-import django_filters 
+import django_filters
 
 
 class CustomUserManager(BaseUserManager):
@@ -36,7 +36,7 @@ class CustomUserManager(BaseUserManager):
         user = self.create_user(
             username,
             password,
-            email
+            email,
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -52,6 +52,8 @@ class CustomUser(AbstractUser):
 
     phone_number = models.CharField("Номер телефона", max_length=50)
     address = models.CharField("Адрес", max_length=255, null=True)
+    # email= models.CharField('Email', max_length=255, null=True)
+    # contry = models.CharField('Страна', max_length=25, null=True)
     objects = CustomUserManager()
 
     is_active = models.BooleanField(default=True)
@@ -127,6 +129,7 @@ class Press(models.Model):
 
 class Genre(models.Model):
     name = models.CharField("Наименование жанра", max_length=255)
+    url = models.SlugField(max_length=160, unique=True, null=True)
 
     class Meta:
         verbose_name = "Жанр"
@@ -149,6 +152,7 @@ class Book(models.Model):
     price = models.FloatField('Цена')
     isbn = models.CharField("Исбн книги", max_length=255)
     image = models.ImageField("Изображение", upload_to='media', null=True, blank=True)
+    url = models.SlugField(max_length=160, unique=True, null=True)
 
     class Meta:
         verbose_name = "Книга"
@@ -173,6 +177,17 @@ class Basket(models.Model):
     def sum(self):
         print("FFFFFFFFF:   ", self.price, self.quantity_buying)
         return self.price * self.quantity_buying
+
+class Favorite(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Избранное"
+        verbose_name_plural = "Израбнные"
+
+    def __str__(self) -> str:
+        return self.user.username
 
 class Card(models.Model):
     name = models.CharField("Банковская карта", max_length=255, unique=True )

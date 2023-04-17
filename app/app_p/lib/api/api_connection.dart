@@ -12,7 +12,7 @@ import 'package:app_p/models/book/language.dart';
 import '../services/storage_service.dart';
 import 'package:app_p/api/api_model.dart';
 
-final _base = "http://192.168.198.233:8000";
+final _base = "http://192.168.0.13:8000";
 final _signInURL = "/myapp/api/token/";
 final _sessionEndpoint = "/api/token/refresh/";
 final _registrationEndpoint = "/api/registration/";

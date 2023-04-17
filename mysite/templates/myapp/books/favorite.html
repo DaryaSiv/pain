@@ -1,0 +1,41 @@
+{%extends 'layout2.html'%}
+{% load widget_tweaks %}
+
+{% block content %}
+<section class="h-100 h-custom">
+    <div class="container h-100 py-5">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" class="h5">Shopping Bag</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in items %}
+                  <tr>
+                    <th scope="row">
+                        <div class="d-flex align-items-beetwen">
+                          <img src="/myapp{{item.book.image.url}}" class="img-fluid rounded-3"
+                              style="width: 120px;" alt="Book">
+                          <div class="flex-column ms-4">
+                              <p class="mb-2">{{item.book.name}}</p>
+                          </div>
+                        </div>
+                    </th>
+                    <td class='align-middle'>
+                      <div class='d-flex flex-row'>
+                        <button class="btn btn-link px-2">
+                          <a href='{% url 'favorite_remove' id=item.id %}'>
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </div>
+                  </td>
+                  </tr>
+                {% endfor %}
+
+    <script src="/static/js/favorite.js"></script>
+{%endblock%}

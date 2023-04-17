@@ -1,64 +1,16 @@
 {% extends 'layout.html' %}
-
-
-{% comment %} {% include "layout.html" %} {% endcomment %}
-
 {% block content %}
-<div class="row">
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Детективы</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card" style="">
-      <a href="{% url 'get_all_books' %}" >
-        <img src="https://img.freepik.com/free-photo/top-view-books-arrangement_23-2148882754.jpg?size=626&ext=jpg.." class="card-img-top w-95" ></a>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Фентези</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Художественная литература</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Научная фантастика</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Ужасы</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-</div>
-{% for genre in genres %}
-{% endfor %}
 
+{% for genre in genres %}
+ <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{genre.name}}</h5>
+        <p class="card-text">ТУТ МОГЛА БЫ БЫТЬ ВАША РЕКЛАМА</p>
+        <a href="/myapp/genres/{{genre.id}}/" class="btn btn-primary" data-genre-id="{{ genre.id }}" id="book{{ genre.id }}">Клик</a>
+      </div>
+    </div>
+  </div>
+{% endfor %}
 {% endblock content %}
 
