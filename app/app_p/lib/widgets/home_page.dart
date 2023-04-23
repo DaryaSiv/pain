@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app_p/widgets/registration.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

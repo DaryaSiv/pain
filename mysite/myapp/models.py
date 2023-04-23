@@ -6,14 +6,8 @@ import django_filters
 
 
 class CustomUserManager(BaseUserManager):
-    """
-    Custom user model manager where email is the unique identifiers
-    for authentication instead of usernames.
-    """
+
     def create_user(self, username, password, email, **extra_fields):
-        """
-        Create and save a user with the given email and password.
-        """
         if not email:
             raise ValueError(_("The Email must be set"))
         email = self.normalize_email(email)
@@ -26,13 +20,7 @@ class CustomUserManager(BaseUserManager):
         return self.model.role
 
     def create_superuser(self, username, email, password):
-        """"
-        Creates and saves a superuser with the given email, date of
-        birth and password.
-        """
-
         print('DDD:', username, password, email)
-
         user = self.create_user(
             username,
             password,
@@ -52,8 +40,6 @@ class CustomUser(AbstractUser):
 
     phone_number = models.CharField("Номер телефона", max_length=50)
     address = models.CharField("Адрес", max_length=255, null=True)
-    # email= models.CharField('Email', max_length=255, null=True)
-    # contry = models.CharField('Страна', max_length=25, null=True)
     objects = CustomUserManager()
 
     is_active = models.BooleanField(default=True)
@@ -69,19 +55,13 @@ class CustomUser(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
     def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
         return True
 
     def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
         return True
 
     @property
     def is_staff(self):
-        "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
         return self.is_admin
 
 
@@ -95,6 +75,12 @@ class CityLocation(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+class UserOrder(models.Model):
+    username = models.TextField('Имя', max_length=255,unique=False)
+    last_name = models.TextField('Фамилия', max_length=255,unique=False)
+    surname = models.TextField('Отчетво', max_length=255,unique=False)
+    phone_number = models.CharField("Номер телефона", max_length=50)
 
 class Author(models.Model):
     name = models.CharField('Имя автора', max_length=128, unique=True)

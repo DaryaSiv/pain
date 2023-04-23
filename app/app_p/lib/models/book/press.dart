@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Press {
-  String name;
-  Press({required this.name});
+  late String name;
+  Press();
   factory Press.fromJson(Map<String, dynamic> json) {
-    return Press(name: json['name']);
+    Press press = Press();
+    press.name = json['name'];
+    return press;
   }
 }

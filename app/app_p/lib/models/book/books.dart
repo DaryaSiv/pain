@@ -3,43 +3,37 @@ import 'package:app_p/models/book/author.dart';
 import 'package:app_p/models/book/press.dart';
 import 'package:app_p/models/book/language.dart';
 
-class Books {
-  String name;
-  Genre genre;
-  Author author;
-  Press press;
-  int year;
-  Language language;
-  int page;
-  int price;
-  int isbn;
-  String img;
-  Books(
-      {required this.name,
-      required this.genre,
-      required this.author,
-      required this.press,
-      required this.year,
-      required this.language,
-      required this.page,
-      required this.price,
-      required this.isbn,
-      required this.img});
+class Book {
+  late String name;
+  late Genre genre;
+  late Author author;
+  late Press press;
+  late int year;
+  late Language language;
+  late int page;
+  late int price;
+  late int isbn;
+  late String img;
+  Book();
 
-  factory Books.fromJson(Map<String, dynamic> json) {
+  factory Book.fromJson(Map<String, dynamic> json) {
     if (json['name'] == '') {
       json['name'] = 'Товар отсуствует';
     }
-    return Books(
-        name: json['name'],
-        genre: json['genre'],
-        author: json['author'],
-        press: json['press'],
-        year: json['year'],
-        language: json['language'],
-        page: json['page'],
-        price: json['price'],
-        isbn: json['isbn'],
-        img: json['img']);
+
+    Book book = Book();
+
+    book.name = json['name'];
+    book.genre = json['genre'];
+    book.author = json['author'];
+    book.press = json['press'];
+    book.year = json['year'];
+    book.language = json['language'];
+    book.page = json['page'];
+    book.price = json['price'];
+    book.isbn = json['isbn'];
+    book.img = json['img'];
+
+    return book;
   }
 }

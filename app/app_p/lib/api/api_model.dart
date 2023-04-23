@@ -26,16 +26,19 @@ class Token {
 class UserRegistration {
   String email;
   String username;
-  String password;
+  String password1;
+  String password2;
 
   UserRegistration(
       {required this.email,
       required this.username,
-      required this.password});
+      required this.password1,
+      required this.password2});
 
   Map<String, dynamic> toDatabaseJson() => {
         "email": this.email,
         "username": this.username,
-        "password": this.password
+        "password1": this.password1,
+        "password2": this.password2,
       };
 }

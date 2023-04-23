@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Author {
-  String name;
-  Author({required this.name});
+  late String name;
+  Author();
   factory Author.fromJson(Map<String, dynamic> json) {
-    return Author(
-      name: json['name']);
+    Author author = Author();
+    author.name = json['name'];
+
+    return Author();
   }
 }

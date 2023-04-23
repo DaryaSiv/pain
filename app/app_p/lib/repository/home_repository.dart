@@ -19,8 +19,20 @@ class HomeRepository implements IHomeRepository {
   Future<void> loginUser(String username, String password) async {
     User user = User();
     user.username = username;
-    user.password = password;
+    user.password1 = password;
 
     await loginApi(user);
+  }
+
+  Future<void> registerUser(String username, String email, String phone_number,
+      String password1, String password2) async {
+    User user = User();
+    user.email = email;
+    user.password1 = password1;
+    user.password2 = password2;
+    user.username = username;
+    user.phone_number = phone_number;
+
+    await registrationApi(user);
   }
 }

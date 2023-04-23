@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   }),
               TextButton(
                 child: Text('page'),
-                onPressed: () {
+                onPressed: () async {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => BooksPage()));
                 },

@@ -1,3 +1,4 @@
+import 'package:app_p/widgets/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:app_p/controllers/home_controller.dart';
 import 'package:app_p/api/api_model.dart';
@@ -99,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   String username = usernameController.text;
                   String password = passwordController.text;
                   await widget._homeController.loginUser(username, password);
+
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => BooksPage()));
                 },
@@ -114,8 +116,10 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               child: TextButton(
                 onPressed: () {
-                  //   Navigator.push(context,
-                  //       MaterialPageRoute(builder: (context) => BooksPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegistrationPage()));
                 },
                 child: Text(
                   'Нет аккаунта? Зарегистрироваться',

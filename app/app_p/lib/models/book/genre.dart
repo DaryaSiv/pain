@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Genre {
-  String name;
-  Genre({required this.name});
+  late String name;
+  Genre();
   factory Genre.fromJson(Map<String, dynamic> json) {
-    return Genre(name: json['name']);
+    Genre genre = Genre();
+    genre.name = json['name'];
+
+    return genre;
   }
 }

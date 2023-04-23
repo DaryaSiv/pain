@@ -22,40 +22,45 @@ class HomeController {
     storage.addUsernameToDb(username);
   }
 
-  Future<String> registerUser(
-      String username, String email, String password) async {
-    UserRegistration userRegistration =
-        UserRegistration(username: username, email: email, password: password);
-    dynamic result = await registrationApi(userRegistration);
-    String reply = '';
-    if (result[0] == 'YES') {
-      loginUser(username, password);
-    }
-    result.forEach((element) {
-      reply = reply + '${element}\n';
-    });
-    return reply;
+  Future<void> registerUser(
+      String username, String email, String phone_number, String password1, String password2) async {
+    await homeRepository.registerUser(username, email, phone_number, password1, password2);
   }
 
-  Future<List<Books>> getBooks() async {
-    List<Books> allBooks = [];
-    print(allBooks);
-    // List<dynamic> result = await booksApi();
-    List<dynamic> result = [];
-    print('evabwbw ${result}');
-    result.forEach((element) {
-      allBooks.add(Books(
-          name: element['name'],
-          genre: element['genre'],
-          author: element['author'],
-          press: element['press'],
-          year: element['year'],
-          language: element['language'],
-          page: element['page'],
-          price: element['price'],
-          isbn: element['isbn'],
-          img: element['img']));
-    });
-    return allBooks;
-  }
+  // Future<String> registerUser(
+  //     String username, String email, String password1, String password2, int districtId) async {
+  //   UserRegistration userRegistration =
+  //       UserRegistration(username: username, email: email, password1: password1, password2: password2);
+  //   dynamic result = await registrationApi(userRegistration);
+  //   String reply = '';
+  //   if (result[0] == 'YES') {
+  //     loginUser(username, password1, password2);
+  //   }
+  //   result.forEach((element) {
+  //     reply = reply + '${element}\n';
+  //   });
+  //   return reply;
+  // }
+
+  // Future<List<Books>> getBooks() async {
+  //   List<Books> allBooks = [];
+  //   print(allBooks);
+  //   // List<dynamic> result = await booksApi();
+  //   List<dynamic> result = [];
+  //   print('evabwbw ${result}');
+  //   result.forEach((element) {
+  //     allBooks.add(Books(
+  //         name: element['name'],
+  //         genre: element['genre'],
+  //         author: element['author'],
+  //         press: element['press'],
+  //         year: element['year'],
+  //         language: element['language'],
+  //         page: element['page'],
+  //         price: element['price'],
+  //         isbn: element['isbn'],
+  //         img: element['img']));
+  //   });
+  //   return allBooks;
+  // }
 }
